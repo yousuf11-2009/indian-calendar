@@ -227,15 +227,34 @@ async function runSearch(){
   }</div>`;
   box.classList.add("show");
 
-  $$(".search-row", box).forEach(row=>{
+  
+   $$(".search-row", box).forEach(row=>{
     row.onclick = () => {
+      console.log("search row clicked", row.dataset);
       const dateStr = row.dataset.date;
+      const raw = row.dataset.raw;
       if (dateStr && dateStr.length===10){
         const [y,m,d] = dateStr.split("-").map(Number);
         state.year=y; state.month=m; state.selectedDay=d; state.view="month";
-        $("#searchInput").value=""; box.classList.remove("show");
-        render();
+      } else if (raw){
+        const parts = raw.split("-").map(Number);
+        const y = parts[0];
+        if (y && y>=1850 && y<=2099){
+          state.year = y;
+          if (parts[1]) state.month = parts[1];
+          state.selectedDay = null;
+          state.view = "month";
+        } else {
+          console.log("year out of range or invalid", y);
+          return;
+        }
+      } else {
+        console.log("no dateStr or raw found", row.dataset);
+        return;
       }
+      console.log("navigating to", state.year, state.month);
+      $("#searchInput").value=""; box.classList.remove("show");
+      render();
     };
   });
 }
