@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indian Calendar — Holidays, Events & Reminders</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body data-theme="dark">
+
+  <!-- Overlay for drawer + modals -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Left navigation drawer -->
+  <nav class="drawer" id="drawer">
+    <div class="drawer-head">
+      <span class="drawer-title">Menu</span>
+      <button class="icon-btn" id="closeDrawer">✕</button>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-label">Appearance</div>
+      <div class="theme-switch">
+        <button class="theme-opt active" data-theme-choice="dark" id="darkBtn">🌙 Dark</button>
+        <button class="theme-opt" data-theme-choice="light" id="lightBtn">☀️ Light</button>
+      </div>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-label">Quick Jump</div>
+      <button class="drawer-link" id="drawerToday">📍 Jump to Today</button>
+      <button class="drawer-link" id="drawerYearView">📅 Year View</button>
+    </div>
+
+    <div class="drawer-section">
+      <div class="drawer-label">Legend</div>
+      <div id="drawerLegend" class="legend-list"></div>
+    </div>
+  </nav>
+
+  <!-- Top bar with hamburger (visible at small width / always present) -->
+  <div class="topbar">
+    <button class="icon-btn hamburger" id="openDrawer">☰</button>
+  </div>
+
+  <div class="app-shell">
+    <div class="column">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="header-badge">☸</div>
+        <h1 class="header-title"><span class="title-highlight">Indian Calendar</span></h1>
+        <div class="header-sub">HOLIDAYS &middot; EVENTS &middot; REMINDERS</div>
+      </header>
+
+      <!-- Search -->
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search holiday, event, or date (YYYY-MM-DD)..." autocomplete="off">
+        <button class="icon-btn search-clear" id="searchClear">✕</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+
+      <!-- View tabs -->
+      <div class="tabs">
+        <button class="tab active" data-view="month">Month</button>
+        <button class="tab" data-view="week">Week</button>
+        <button class="tab" data-view="day">Day</button>
+        <button class="tab" data-view="year">Year</button>
+      </div>
+
+      <!-- Nav row -->
+      <div class="nav-row">
+        <button class="nav-arrow" id="prevBtn">‹</button>
+        <div class="nav-label-wrap">
+          <button class="nav-label-btn" id="monthLabelBtn"><span id="monthLabel">Month</span> <span class="caret">▾</span></button>
+          <button class="nav-label-btn year-btn" id="yearLabelBtn"><span id="yearLabel">Year</span> <span class="caret">▾</span></button>
+          <div class="swipe-hint" id="viewHint">&larr; swipe to change month &rarr;</div>
+        </div>
+        <button class="nav-arrow" id="nextBtn">›</button>
+      </div>
+
+      <!-- Dynamic content -->
+      <div class="content" id="content"></div>
+
+      <!-- Legend -->
+      <div class="legend-row" id="legendRow"></div>
+
+      <div class="bottom-pad"></div>
+    </div>
+  </div>
+
+  <!-- Floating Today button -->
+  <button class="fab-today" id="fabToday">📍 Today</button>
+
+  <!-- Month picker modal -->
+  <div class="modal" id="monthModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <span class="modal-title">Select Month — <span id="monthModalYear"></span></span>
+        <button class="icon-btn" id="closeMonthModal">✕</button>
+      </div>
+      <div class="month-grid" id="monthGrid"></div>
+    </div>
+  </div>
+
+  <!-- Year picker modal -->
+  <div class="modal" id="yearModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <span class="modal-title">Select Year</span>
+        <button class="icon-btn" id="closeYearModal">✕</button>
+      </div>
+      <div class="year-grid" id="yearGrid"></div>
+    </div>
+  </div>
+
+  <!-- Event editor modal -->
+  <div class="modal" id="eventModal">
+    <div class="modal-card event-card">
+      <div class="modal-head">
+        <span class="modal-title" id="eventModalDate">Add Event</span>
+        <button class="icon-btn" id="closeEventModal">✕</button>
+      </div>
+
+      <div class="field-label">TYPE</div>
+      <div class="type-row" id="typeRow"></div>
+
+      <div class="field-label">TITLE</div>
+      <input type="text" id="evTitle" class="text-input" placeholder="Event title">
+
+      <div class="field-label">TIME (optional, HH:MM)</div>
+      <input type="text" id="evTime" class="text-input" placeholder="e.g. 18:30">
+
+      <div class="field-label">NOTES (optional)</div>
+      <textarea id="evNotes" class="text-area" placeholder="Notes..."></textarea>
+
+      <button class="pill-toggle" id="evRepeat">🔁 Repeat every year (birthdays)</button>
+
+      <div class="modal-actions">
+        <button class="btn danger" id="evDelete" style="display:none;">Delete</button>
+        <div class="spacer"></div>
+        <button class="btn ghost" id="evCancel">Cancel</button>
+        <button class="btn primary" id="evSave">Save</button>
+      </div>
+    </div>
+  </div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
