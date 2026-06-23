@@ -82,7 +82,7 @@ LUNAR_HOLIDAYS = {
            (11, 5, "Guru Nanak Jayanti", "national", "sikh")],
     2026: [(2, 15, "Maha Shivaratri", "national", "hindu"), (3, 4, "Holi", "national", "hindu"),
            (3, 20, "Eid al-Fitr", "national", "muslim"), (5, 27, "Eid al-Adha", "national", "muslim"),
-           (6, 17, "Muharram", "national", "muslim"),(6, 26, "Muharram", "national", "muslim"), (3, 27, "Ram Navami", "national", "hindu"),
+           (6, 17, "Muharram(Start)", "national", "muslim"),(6, 26, "Muharram", "national", "muslim"), (3, 27, "Ram Navami", "national", "hindu"),
            (3, 31, "Mahavir Jayanti", "national", "jain"), (5, 1, "Buddha Purnima", "optional", "buddhist"),
            (8, 25, "Milad-un-Nabi", "national", "muslim"), (6, 29, "Guru Purnima", "optional", "hindu"),
            (8, 28, "Raksha Bandhan", "optional", "hindu"), (9, 4, "Janmashtami", "national", "hindu"),
